@@ -1,0 +1,22 @@
+services:
+  db:
+    environment:
+      POSTGRES_DB: test_thc
+    ports: !reset []
+
+  migrate:
+    profiles: ["disabled"]
+
+  api:
+    profiles: ["disabled"]
+
+  tests:
+    build:
+      context: .
+      target: test
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db/test_thc
+      POKEMON_API_URL: https://pokeapi.co/api/v2
+    depends_on:
+      db:
+        condition: service_healthy

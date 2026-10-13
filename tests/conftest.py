@@ -1,9 +1,10 @@
 import os
 from collections.abc import AsyncGenerator
+
 import httpx
 
-os.environ["DATABASE_URL"] = (
-    "postgresql+psycopg://postgres:postgres@localhost/test_thc"
+os.environ.setdefault(
+    "DATABASE_URL", "postgresql+psycopg://postgres:postgres@localhost/test_thc"
 )
 
 import pytest
@@ -12,7 +13,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 from sqlalchemy.pool import NullPool
 
 from core.database import Base, get_db
-from dependencies import get_http_client, get_pokemon_client
+from dependencies import get_http_client
 from main import app
 from tests.pokeapi_response import POKEAPI_RESPONSES
 
