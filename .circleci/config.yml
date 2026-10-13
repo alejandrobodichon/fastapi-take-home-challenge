@@ -10,11 +10,8 @@ jobs:
       - python/install-packages:
           pkg-manager: uv
       - run:
-          name: Install dependencies
-          command: uv sync --locked
-      - run:
-          name: uv run pytest
-          command: python -m pytest
+          name: Run tests
+          command: uv run pytest
       - persist_to_workspace:
           root: ~/project
           paths:
