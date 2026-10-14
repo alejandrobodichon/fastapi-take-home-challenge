@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   python: circleci/python@4.0.0
+orbs:
+  coveralls: coveralls/coveralls@2.2.5
 
 jobs:
   build_and_test: 
@@ -23,6 +25,7 @@ jobs:
       - run:
           name: Run tests
           command: uv run pytest --cov=. --cov-report=term-missing
+      - coveralls/upload
     
   build_image:
     docker:
