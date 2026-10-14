@@ -21,6 +21,7 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    "coveralls>=4.1.0",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.0.0",
     "pytest-cov>=7.1.0",
