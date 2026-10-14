@@ -23,8 +23,21 @@ jobs:
       - run:
           name: Run tests
           command: uv run pytest --cov=. --cov-report=term-missing
+    
+  build_image:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: docker build -t thc-app:${CIRCLE_SHA1} 
 
 workflows:
   build_test_deploy: 
     jobs:
       - build_and_test
+      - build_image:
+          requires:
+            - build_and_test
