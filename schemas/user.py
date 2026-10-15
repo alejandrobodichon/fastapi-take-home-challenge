@@ -1,5 +1,6 @@
-from custom_types import Lower
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
+
+from custom_types import Lower
 from schemas.pokemon import PokemonSummary
 
 
@@ -14,7 +15,6 @@ class UserUpdate(BaseModel):
     username: str | None = Field(default=None, min_length=1, max_length=50)
     email: Lower[EmailStr] | None= Field(default=None, max_length=120)
 
-
 class UserPrivate(BaseModel):
     id: int
     username: str | None = Field(default=None, min_length=1, max_length=50)
@@ -27,3 +27,4 @@ class UserProfileResponse(BaseModel):
     pokemons: list[PokemonSummary]
     
     model_config = ConfigDict(from_attributes=True)
+    
